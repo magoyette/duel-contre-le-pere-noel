@@ -1,0 +1,208 @@
+:: StoryTitle
+Duel contre le Père Noël
+
+:: StoryData
+{
+  "ifid": "2CA343F7-2C2C-4C49-A92F-5EEC91E099A3",
+  "format": "Chapbook"
+}
+
+:: Start
+config.style.page.font: "Alegreya/serif"
+config.style.page.header.font: "Alegreya/serif"
+config.style.page.header.link.font: "Alegreya/serif"
+config.style.page.footer.font: "Alegreya/serif"
+config.style.page.footer.link.font: "Alegreya/serif"
+config.header.left: ""
+config.footer.left: "[[À propos->À propos]]"
+config.footer.right: "{restart link, label: 'Recommencer l’histoire'}"
+chocolat: false
+dragons: false
+--
+
+[align center]
+
+# Duel contre le {cycling link for: 'adversaire', choices: ['Père Noël', 'méchant qui veut gâcher Noël']}
+
+## par Marc-André Goyette
+
+<br/>
+
+[[Commencer l'histoire->Début]]
+
+:: Début
+config.header.left: "Duel contre le {adversaire}"
+config.footer.left: ""
+--
+
+Toute l'année, je me suis préparé pour la nuit de Noël. Je veux [[capturer->{adversaire}]] le {adversaire}.
+
+:: Père Noël
+adversaire: "Père Noël"
+adversaireNomCourt: "Père Noël"
+--
+
+L'an passé, je n'ai pas reçu tous les cadeaux de ma liste même si j'avais été gentil. C'est inacceptable!
+
+{embed passage: 'Bataille'}
+
+:: méchant qui veut gâcher Noël
+adversaire: "méchant qui veut gâcher Noël"
+adversaireNomCourt: "méchant"
+--
+
+L'an passé, le {adversaireNomCourt} a volé le traîneau de rechange du Père Noël et a essayé de prendre les cadeaux sous les sapins de Noël.
+
+{embed passage: 'Bataille'}
+
+:: Bataille
+
+Je suis prêt. Le duel va se dérouler dans le [[ciel->Ciel]].
+
+:: Ciel
+
+Je vais :
+
+- lancer des [[blocs de TNT->TNT]] avec une catapulte
+- attaquer avec des [[dragons de glace->Dragons]]
+- utiliser un [[camion de pompier->Pompier]] rempli de chocolat
+
+[JavaScript]
+window.cbExt.addBackdropClass('red');
+
+:: Attente
+
+Il ne reste plus qu'à attendre.
+
+[JavaScript]
+window.cbExt.removeBackdropClass('red');
+
+[after 3 second]
+C'est long.
+
+[after 6 second]
+C'est ennuyant.
+
+[after 9 second]
+C'est vraiment long.
+
+[after 10 second]
+Le {adversaireNomCourt} arrive dans le traîneau!
+
+:: TNT
+plan: 'jouer avec du TNT'
+--
+
+{embed passage: 'Attente'}
+
+[after 11 second]
+Je catapulte le [[bloc de TNT->Bloc de TNT]].
+
+:: Bloc de TNT
+
+Ah non! Trois dragons de glace apparaîssent au-dessus du traîneau du {adversaireNomCourt}.
+
+C'était **_mon idée_**!
+
+Le souffle des dragons enveloppe l'explosion. Un [[palais de glace->Palais]] apparaît dans le ciel.
+
+[JavaScript]
+window.cbExt.addBackdropClass('red');
+
+:: Palais
+
+Ma seule consolation : les dragons ne chantent pas comme des princesses en fabriquant leurs palais de glace.
+
+[[J'ai perdu->Défaite]].
+
+:: Dragons
+dragons: true
+--
+
+Malheureusement, les dragons, ça n'existe pas.
+
+Il faut choisir un {back link, label: 'autre plan'}.
+
+:: Pompier
+plan: 'donner des maux de ventre aux rennes'
+chocolat: true
+--
+
+Si le chocolat c'est mauvais pour les chats, c'est sûrement vrai pour les rennes. Comment résister au chocolat? C'est si bon!
+
+Les rennes ne pourront pas faire voler le traîneau en ayant mal à l'estomac.
+
+Mon plan est [[infaillible->Infaillible]].
+
+:: Infaillible
+
+{embed passage: 'Attente'}
+
+[after 11 second]
+J'arrose les rennes de [[chocolat->Arroser]]!
+
+:: Arroser
+
+Qu'est-ce qu'il fait là, lui? Il m'arrache le boyau des mains et dévore tout le chocolat.
+
+Depuis quand le lapin de Pâques fait équipe avec le {adversaire}?
+
+[[J'ai perdu->Défaite]].
+
+[JavaScript]
+window.cbExt.addBackdropClass('red');
+
+:: Défaite
+
+C'était mon seul piège. Avec un budget de 10 dollars, les choix sont limités.
+
+[if adversaireNomCourt == 'méchant']
+Le Père Noël va encore une fois arrêter le méchant, mais j'aurais voulu être le héros ce soir.
+[else]
+Comment le Père Noël a pu deviner quel serait mon plan? C'est impossible qu'il puisse savoir tout ce que je fais.
+[continue]
+
+Il faut [[revenir à la maison->Fin]].
+
+[JavaScript]
+window.cbExt.removeBackdropClass('red');
+
+:: Fin
+
+Dans la maison, il y a un nouveau cadeau sous le sapin et une [[lettre->Lettre]].
+
+:: Lettre
+
+*Un petit cadeau pour que tu puisses déchaîner ton imagination.*
+
+[if adversaire == 'Père Noël']
+*Bonne chance pour l'an prochain.*
+[else]
+*J'ai arrêté le méchant, mais ne sois pas déçu. On ne peut pas rester dans la liste des enfants sages et {plan}.*
+[continue]
+
+J'ai ouvert le [[cadeau->Cadeau]].
+
+:: Cadeau
+
+C'est un livre avec des pages blanches, sans aucun texte.
+
+Je ne comprends pas pourquoi le Père Noël m'a donné ce cadeau.
+
+[if dragons]
+C'est peut-être un livre qui fait apparaître les monstres qu'on y dessine? Comme des dragons de glace...
+[else]
+C'est peut-être un livre magique?
+[continue]
+
+[if chocolat]
+Je vais aller boire un bon chocolat chaud.
+[continue]
+
+*_Fin_*
+
+:: À propos
+
+Cette fiction interactive a été écrite pour la [4e édition de la Partim 500](https://itch.io/jam/fr-partim-500-an-2019). Chaque aventure textuelle devait avoir un maximum de 500 mots et le thème était le *déchaînement*.
+
+[Chapbook](https://klembot.github.io/chapbook/), un format d'histoire [Twine](https://twinery.org/), a été utilisé pour créer cette fiction.
